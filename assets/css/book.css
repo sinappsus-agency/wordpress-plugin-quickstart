@@ -1,0 +1,226 @@
+/**
+ * HTH Sample Plugin - Book Post Type Styles
+ * 
+ * Specific styles for the Book custom post type.
+ */
+
+/* Single Book Post Styles */
+.single-book .hth-book-details {
+    background: #f8f9fa;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border-left: 4px solid #0073aa;
+}
+
+.single-book .hth-book-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.single-book .hth-meta-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.single-book .hth-meta-label {
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.single-book .hth-meta-value {
+    color: #333;
+}
+
+/* Book Archive Styles */
+.post-type-archive-book .hth-book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.post-type-archive-book .hth-book-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-type-archive-book .hth-book-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.post-type-archive-book .hth-book-thumbnail {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+}
+
+.post-type-archive-book .hth-book-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-type-archive-book .hth-book-content {
+    padding: 20px;
+}
+
+.post-type-archive-book .hth-book-title {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    line-height: 1.3;
+}
+
+.post-type-archive-book .hth-book-title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.post-type-archive-book .hth-book-title a:hover {
+    color: #0073aa;
+}
+
+.post-type-archive-book .hth-book-excerpt {
+    color: #666;
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.post-type-archive-book .hth-book-meta-small {
+    font-size: 0.85em;
+    color: #888;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+/* Genre Taxonomy Styles */
+.tax-genre .hth-genre-description {
+    background: #f0f6fc;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border-left: 4px solid #0073aa;
+}
+
+.tax-genre .hth-books-in-genre {
+    margin-top: 30px;
+}
+
+.hth-genre-tag {
+    display: inline-block;
+    background: #0073aa;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    text-decoration: none;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.hth-genre-tag:hover {
+    background: #005a87;
+    color: white;
+}
+
+/* Book Filter/Search Widget */
+.hth-book-filters {
+    background: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+
+.hth-filter-row {
+    display: flex;
+    gap: 15px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.hth-filter-field {
+    flex: 1;
+    min-width: 150px;
+}
+
+.hth-filter-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.hth-filter-field select,
+.hth-filter-field input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.hth-filter-button {
+    background: #0073aa;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.hth-filter-button:hover {
+    background: #005a87;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .post-type-archive-book .hth-book-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .single-book .hth-book-meta {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .hth-filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .hth-filter-field {
+        min-width: auto;
+    }
+}
+
+/* Loading states for AJAX book filtering */
+.hth-books-loading {
+    opacity: 0.6;
+    position: relative;
+}
+
+.hth-books-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #0073aa;
+    border-radius: 50%;
+    animation: hth-spin 1s linear infinite;
+}
+
+@keyframes hth-spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

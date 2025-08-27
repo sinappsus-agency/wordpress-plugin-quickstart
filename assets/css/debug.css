@@ -1,0 +1,296 @@
+/**
+ * HTH Sample Plugin - Development and Debug Styles
+ * 
+ * Styles loaded only in debug mode for development assistance.
+ */
+
+/* Debug Information Panel */
+.hth-debug-panel {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 12px;
+    max-width: 300px;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.hth-debug-panel h4 {
+    margin: 0 0 10px 0;
+    color: #4CAF50;
+    font-size: 14px;
+}
+
+.hth-debug-panel .debug-item {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hth-debug-panel .debug-label {
+    color: #81C784;
+}
+
+.hth-debug-panel .debug-value {
+    color: #FFE082;
+    margin-left: 10px;
+}
+
+.hth-debug-panel .debug-toggle {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.hth-debug-panel.minimized .debug-content {
+    display: none;
+}
+
+/* Development Helper Outlines */
+.hth-debug-mode .hth-plugin-component {
+    outline: 2px dashed rgba(255, 0, 0, 0.3);
+    position: relative;
+}
+
+.hth-debug-mode .hth-plugin-component::before {
+    content: attr(class);
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-family: monospace;
+    border-radius: 2px;
+    z-index: 1000;
+}
+
+/* Debug Console */
+.hth-debug-console {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    padding: 10px;
+    overflow-y: auto;
+    z-index: 10000;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.hth-debug-console.active {
+    transform: translateY(0);
+}
+
+.hth-debug-console .console-line {
+    margin-bottom: 2px;
+    white-space: pre-wrap;
+}
+
+.hth-debug-console .console-line.error {
+    color: #f48771;
+}
+
+.hth-debug-console .console-line.warning {
+    color: #dcdcaa;
+}
+
+.hth-debug-console .console-line.info {
+    color: #9cdcfe;
+}
+
+.hth-debug-console .console-line.success {
+    color: #4ec9b0;
+}
+
+/* Performance Indicators */
+.hth-performance-indicator {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 11px;
+    z-index: 9998;
+}
+
+.hth-performance-indicator .perf-item {
+    margin-bottom: 5px;
+}
+
+.hth-performance-indicator .perf-good {
+    color: #4CAF50;
+}
+
+.hth-performance-indicator .perf-warning {
+    color: #FF9800;
+}
+
+.hth-performance-indicator .perf-bad {
+    color: #F44336;
+}
+
+/* AJAX Request Tracker */
+.hth-ajax-tracker {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(33, 150, 243, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 9997;
+    transition: all 0.3s ease;
+}
+
+.hth-ajax-tracker.loading {
+    background: rgba(255, 152, 0, 0.9);
+    animation: hth-pulse 1s infinite;
+}
+
+.hth-ajax-tracker.error {
+    background: rgba(244, 67, 54, 0.9);
+}
+
+.hth-ajax-tracker.success {
+    background: rgba(76, 175, 80, 0.9);
+}
+
+@keyframes hth-pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* Debug Grid Overlay */
+.hth-debug-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9990;
+    opacity: 0.1;
+}
+
+.hth-debug-grid::before,
+.hth-debug-grid::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hth-debug-grid::before {
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 0, 0, 1) 0px,
+            rgba(255, 0, 0, 1) 1px,
+            transparent 1px,
+            transparent 20px
+        );
+}
+
+.hth-debug-grid::after {
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            rgba(255, 0, 0, 1) 0px,
+            rgba(255, 0, 0, 1) 1px,
+            transparent 1px,
+            transparent 20px
+        );
+}
+
+/* Debug Keyboard Shortcuts Helper */
+.hth-debug-shortcuts {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 11px;
+    max-width: 250px;
+    z-index: 9996;
+    display: none;
+}
+
+.hth-debug-shortcuts.visible {
+    display: block;
+}
+
+.hth-debug-shortcuts h5 {
+    margin: 0 0 10px 0;
+    color: #4CAF50;
+}
+
+.hth-debug-shortcuts .shortcut {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+}
+
+.hth-debug-shortcuts .key {
+    color: #FFE082;
+    font-weight: bold;
+}
+
+.hth-debug-shortcuts .desc {
+    color: #B0BEC5;
+}
+
+/* Media Queries for Debug Elements */
+@media (max-width: 768px) {
+    .hth-debug-panel {
+        bottom: 10px;
+        right: 10px;
+        font-size: 10px;
+        max-width: 200px;
+    }
+    
+    .hth-performance-indicator {
+        left: 10px;
+        font-size: 10px;
+    }
+    
+    .hth-debug-console {
+        height: 150px;
+        font-size: 10px;
+    }
+    
+    .hth-debug-shortcuts {
+        bottom: 10px;
+        left: 10px;
+        font-size: 10px;
+        max-width: 200px;
+    }
+}

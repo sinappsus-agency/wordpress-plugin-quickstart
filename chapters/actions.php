@@ -186,68 +186,432 @@ function hth_append_text_to_post($content) {
     }
     return $content; // Always return the content!
 }
+
+/**
+ * Example 2: Title filter with parameters
+ * 
+ * This filter demonstrates:
+ * - Using multiple parameters in filters
+ * - Conditional filtering based on context
+ * - Modifying data based on post type
+ */
+add_filter('the_title', 'hth_modify_post_title', 10, 2);
+function hth_modify_post_title($title, $post_id) {
+    // Only modify titles on frontend single posts
+    if (is_single() && !is_admin() && in_the_loop()) {
+        $post = get_post($post_id);
+        if ($post && $post->post_type === 'post') {
+            $title = '📖 ' . $title; // Add an emoji prefix
+        }
+    }
+    return $title;
 }
 
-// WordPress Filter Hooks (some of the most commonly used):
-// - the_content: Modifies post/page content before display
-// - the_title: Modifies post/page titles
-// - the_excerpt: Modifies post excerpts
-// - wp_title: Modifies the page title in the <title> tag
-// - body_class: Adds classes to the body tag
-// - post_class: Adds classes to post containers
-// - nav_menu_css_class: Modifies navigation menu CSS classes
-// - wp_nav_menu_items: Modifies navigation menu items
-// - comment_text: Modifies comment text before display
-// - get_comment_author: Modifies comment author name
-// - login_redirect: Modifies login redirect URL
-// - logout_redirect: Modifies logout redirect URL
-// - wp_mail: Modifies email parameters before sending
-// - upload_mimes: Modifies allowed file types for uploads
-// - intermediate_image_sizes: Modifies available image sizes
-// - posts_per_page: Modifies number of posts per page
-// - pre_get_posts: Modifies query parameters before execution
-// - query_vars: Adds custom query variables
-// - rewrite_rules: Modifies URL rewrite rules
-// - admin_footer_text: Modifies admin footer text
-// - update_footer: Modifies admin footer version text
-// - locale: Modifies the site locale
-// - sanitize_file_name: Modifies uploaded file names
-// - wp_get_attachment_url: Modifies attachment URLs
-// - excerpt_length: Modifies excerpt length
-// - excerpt_more: Modifies "read more" text for excerpts
-// - comment_form_defaults: Modifies comment form defaults
-// - authenticate: Modifies user authentication
-// - wp_dropdown_pages: Modifies page dropdown options
-// - wp_dropdown_cats: Modifies category dropdown options
-// - get_avatar: Modifies user avatars
-// - single_template: Modifies single post template
-// - page_template: Modifies page template
-// - archive_template: Modifies archive template
-// - search_template: Modifies search results template
-// - 404_template: Modifies 404 error template
-// - attachment_link: Modifies attachment page links
-// - wp_redirect: Modifies redirect behavior
-// - wp_die_handler: Modifies error handling
-// - script_loader_tag: Modifies script tags
-// - style_loader_tag: Modifies style tags
-// - wp_get_current_user: Modifies current user object
-// - user_contactmethods: Modifies user contact methods
-// - show_admin_bar: Controls admin bar visibility
-// - wp_mail_from: Modifies email sender address
-// - wp_mail_from_name: Modifies email sender name
-// - wp_mail_content_type: Modifies email content type
-// - widget_title: Modifies widget titles
-// - dynamic_sidebar_params: Modifies sidebar parameters
-// - get_search_query: Modifies search query
-// - get_search_form: Modifies search form HTML
-// - wp_trim_excerpt: Modifies excerpt trimming
-// - map_meta_cap: Modifies capability mapping
-// - editable_roles: Modifies available user roles
-// - role_has_cap: Modifies role capabilities
-// - gettext: Modifies translation strings
-// - plugin_action_links: Modifies plugin action links
-// - media_upload_tabs: Modifies media upload tabs
-// - attachment_fields_to_edit: Modifies attachment edit fields
-// - image_send_to_editor: Modifies image insertion into editor
-// - richedit_pre: Modifies content before rich editor
-// - wp_editor_settings: Modifies editor settings
+/**
+ * Example 3: Query modification filter
+ * 
+ * This demonstrates how to modify WordPress queries before they execute.
+ * This is very powerful for changing how content is displayed.
+ */
+add_filter('pre_get_posts', 'hth_modify_main_query');
+function hth_modify_main_query($query) {
+    // Only modify the main query on the frontend
+    if (!is_admin() && $query->is_main_query()) {
+        // On the home page, show only 5 posts
+        if ($query->is_home()) {
+            $query->set('posts_per_page', 5);
+        }
+        
+        // On category pages, exclude posts from category ID 1
+        if ($query->is_category()) {
+            $query->set('cat', '-1');
+        }
+    }
+}
+
+/**
+ * COMMONLY USED FILTER HOOKS:
+ * 
+ * Content Filters:
+ * - the_content: Modify post/page content before display
+ * - the_title: Modify post/page titles
+ * - the_excerpt: Modify post excerpts
+ * - wp_title: Modify page title in <title> tag
+ * - get_the_excerpt: Modify excerpt retrieval
+ * - wp_trim_excerpt: Modify excerpt trimming
+ * - excerpt_length: Modify excerpt word count
+ * - excerpt_more: Modify "read more" text
+ * 
+ * Template Filters:
+ * - body_class: Add classes to body tag
+ * - post_class: Add classes to post containers
+ * - single_template: Modify single post template
+ * - page_template: Modify page template
+ * - archive_template: Modify archive template
+ * - search_template: Modify search template
+ * - 404_template: Modify 404 template
+ * 
+ * Navigation Filters:
+ * - nav_menu_css_class: Modify menu CSS classes
+ * - wp_nav_menu_items: Modify menu items
+ * - wp_page_menu: Modify page menu
+ * - wp_list_pages: Modify page listing
+ * 
+ * Query Filters:
+ * - pre_get_posts: Modify queries before execution
+ * - posts_per_page: Modify posts per page
+ * - query_vars: Add custom query variables
+ * - request: Modify query request
+ * 
+ * User & Authentication Filters:
+ * - authenticate: Modify user authentication
+ * - wp_login_errors: Modify login error messages
+ * - login_redirect: Modify login redirect URL
+ * - logout_redirect: Modify logout redirect URL
+ * - user_contactmethods: Modify user contact methods
+ * - get_avatar: Modify user avatars
+ * 
+ * Admin Filters:
+ * - admin_footer_text: Modify admin footer text
+ * - update_footer: Modify admin version text
+ * - plugin_action_links: Modify plugin action links
+ * - manage_posts_columns: Modify post list columns
+ * - manage_pages_columns: Modify page list columns
+ * 
+ * Media Filters:
+ * - upload_mimes: Modify allowed file types
+ * - wp_get_attachment_url: Modify attachment URLs
+ * - image_send_to_editor: Modify image insertion
+ * - media_upload_tabs: Modify media upload tabs
+ * - attachment_fields_to_edit: Modify attachment fields
+ * 
+ * Email Filters:
+ * - wp_mail: Modify email parameters
+ * - wp_mail_from: Modify sender email
+ * - wp_mail_from_name: Modify sender name
+ * - wp_mail_content_type: Modify email content type
+ * 
+ * Security Filters:
+ * - sanitize_file_name: Modify uploaded file names
+ * - wp_die_handler: Modify error handling
+ * - map_meta_cap: Modify capability mapping
+ * - editable_roles: Modify available user roles
+ * 
+ * Widget Filters:
+ * - widget_title: Modify widget titles
+ * - dynamic_sidebar_params: Modify sidebar parameters
+ * - widget_display_callback: Modify widget display
+ * 
+ * Internationalization Filters:
+ * - locale: Modify site locale
+ * - gettext: Modify translation strings
+ * - gettext_with_context: Modify contextual translations
+ */
+
+// SECTION 3: REMOVING HOOKS
+// Sometimes you need to remove hooks added by WordPress core or other plugins
+
+/**
+ * Example of removing actions and filters
+ * 
+ * This demonstrates how to remove existing hooks.
+ * This is useful when you want to disable default WordPress behavior.
+ */
+function hth_remove_default_hooks() {
+    // Remove the WordPress version from head
+    remove_action('wp_head', 'wp_generator');
+    
+    // Remove RSD link from head
+    remove_action('wp_head', 'rsd_link');
+    
+    // Remove Windows Live Writer manifest link
+    remove_action('wp_head', 'wlwmanifest_link');
+    
+    // Remove automatic paragraph formatting from excerpts
+    remove_filter('the_excerpt', 'wpautop');
+    
+    // Remove capital P filter (changes "wordpress" to "WordPress")
+    remove_filter('the_content', 'capital_P_dangit', 11);
+    remove_filter('the_title', 'capital_P_dangit', 11);
+}
+
+// Hook the removal function to init
+add_action('init', 'hth_remove_default_hooks');
+
+// SECTION 4: CUSTOM HOOKS
+// Creating your own action and filter hooks for extensibility
+
+/**
+ * Example of creating a custom action hook
+ * 
+ * This demonstrates how to create your own hooks that other developers
+ * (or your own code) can hook into.
+ */
+function hth_display_custom_content() {
+    echo '<div class="custom-content">';
+    
+    // Fire a custom action before content
+    do_action('hth_before_custom_content');
+    
+    echo '<h2>Custom Content Section</h2>';
+    echo '<p>This is some custom content.</p>';
+    
+    // Fire a custom action after content
+    do_action('hth_after_custom_content');
+    
+    echo '</div>';
+}
+
+/**
+ * Example of creating a custom filter hook
+ * 
+ * This demonstrates how to create filter hooks that allow
+ * modification of your plugin's data.
+ */
+function hth_get_greeting_message($name = 'User') {
+    $message = "Hello, {$name}!";
+    
+    // Apply a custom filter to allow modification
+    $message = apply_filters('hth_greeting_message', $message, $name);
+    
+    return $message;
+}
+
+// Examples of hooking into our custom hooks
+add_action('hth_before_custom_content', 'hth_add_before_content');
+function hth_add_before_content() {
+    echo '<p><em>This content was added via custom hook!</em></p>';
+}
+
+add_filter('hth_greeting_message', 'hth_modify_greeting', 10, 2);
+function hth_modify_greeting($message, $name) {
+    return "🎉 " . $message . " Welcome to our site!";
+}
+
+// SECTION 5: CONDITIONAL HOOKS
+// Executing hooks only under specific conditions
+
+/**
+ * Example of conditional hook execution
+ * 
+ * This demonstrates how to conditionally add hooks based on
+ * various WordPress conditions.
+ */
+function hth_conditional_hooks() {
+    // Only add footer script on single posts
+    if (is_single()) {
+        add_action('wp_footer', 'hth_single_post_footer');
+    }
+
+    // Only modify titles on the home page
+    if (is_home()) {
+        add_filter('the_title', 'hth_home_title_modifier');
+    }
+
+    // Only add admin styles in admin area
+    if (is_admin()) {
+        add_action('admin_enqueue_scripts', 'hth_admin_styles');
+    }
+
+    // Only run on specific post types
+    if (is_singular('book')) {
+        add_action('wp_head', 'hth_book_meta_tags');
+    }
+
+    // Only on archive pages
+    if (is_archive()) {
+        add_action('wp_footer', 'hth_archive_footer');
+    }
+
+    // Only on category archive
+    if (is_category()) {
+        add_action('wp_head', 'hth_category_head');
+    }
+
+    // Only on tag archive
+    if (is_tag()) {
+        add_action('wp_head', 'hth_tag_head');
+    }
+
+    // Only on author archive
+    if (is_author()) {
+        add_action('wp_footer', 'hth_author_footer');
+    }
+
+    // Only on search results page
+    if (is_search()) {
+        add_filter('the_content', 'hth_search_content_modifier');
+    }
+
+    // Only on 404 page
+    if (is_404()) {
+        add_action('wp_footer', 'hth_404_footer');
+    }
+
+    // Only on front page
+    if (is_front_page()) {
+        add_action('wp_head', 'hth_front_page_head');
+    }
+
+    // Only on page (not post)
+    if (is_page()) {
+        add_action('wp_footer', 'hth_page_footer');
+    }
+
+    // Only on attachment pages
+    if (is_attachment()) {
+        add_action('wp_head', 'hth_attachment_head');
+    }
+
+    // Only for logged-in users
+    if (is_user_logged_in()) {
+        add_action('wp_footer', 'hth_logged_in_footer');
+    }
+
+    // Only for specific user role (e.g., administrator)
+    if (current_user_can('edit_posts')) {
+        // multiple roles 
+        $user = wp_get_current_user();
+        $allowed_roles = array('editor', 'administrator', 'author');
+        if (array_intersect($allowed_roles, $user->roles)) {
+
+            add_action('admin_notices', 'hth_admin_notice');
+        }
+        
+    }
+}
+
+// Hook to template_redirect (runs after query is determined)
+add_action('template_redirect', 'hth_conditional_hooks');
+
+// SECTION 6: ADVANCED HOOK TECHNIQUES
+// Advanced patterns and techniques for working with hooks
+
+/**
+ * Example of hook priority and execution order
+ * 
+ * This demonstrates how priority affects execution order
+ * and how to ensure your hooks run at the right time.
+ */
+add_action('wp_head', 'hth_very_early_head', 1);
+function hth_very_early_head() {
+    echo "<!-- Very early head content -->\n";
+}
+
+add_action('wp_head', 'hth_early_head', 5);
+function hth_early_head() {
+    echo "<!-- Early head content -->\n";
+}
+
+add_action('wp_head', 'hth_default_head'); // Default priority 10
+function hth_default_head() {
+    echo "<!-- Default priority head content -->\n";
+}
+
+add_action('wp_head', 'hth_late_head', 20);
+function hth_late_head() {
+    echo "<!-- Late head content -->\n";
+}
+
+/**
+ * Example of using closures with hooks
+ * 
+ * This demonstrates how to use anonymous functions (closures)
+ * with WordPress hooks.
+ */
+add_action('wp_footer', function() {
+    echo '<script>console.log("Closure hook executed!");</script>';
+});
+
+/**
+ * Example of using class methods with hooks
+ * 
+ * This demonstrates how to hook class methods to WordPress hooks.
+ */
+class HTH_Hook_Example {
+    
+    public function __construct() {
+        // Hook instance method
+        add_action('init', array($this, 'init_method'));
+        
+        // Hook static method
+        add_action('wp_head', array(__CLASS__, 'static_method'));
+    }
+    
+    public function init_method() {
+        // Instance method hooked to init
+        error_log('Instance method called on init');
+    }
+    
+    public static function static_method() {
+        // Static method hooked to wp_head
+        echo "<!-- Static method output -->\n";
+    }
+}
+
+// Instantiate the class to register hooks
+new HTH_Hook_Example();
+
+/**
+ * BEST PRACTICES FOR HOOKS:
+ * 
+ * 1. Naming Conventions:
+ *    - Prefix all function names with your plugin/theme prefix
+ *    - Use descriptive names that explain what the hook does
+ *    - Example: 'hth_modify_post_title' instead of 'modify_title'
+ * 
+ * 2. Hook Priority:
+ *    - Use default priority (10) unless you have a specific reason to change it
+ *    - Lower numbers run earlier, higher numbers run later
+ *    - Common priorities: 1 (very early), 5 (early), 10 (default), 15 (late), 20 (very late)
+ * 
+ * 3. Performance Considerations:
+ *    - Avoid heavy processing in frequently called hooks
+ *    - Cache expensive operations when possible
+ *    - Use conditional checks to limit hook execution
+ * 
+ * 4. Security:
+ *    - Always sanitize input data in hooks
+ *    - Validate user permissions before executing admin hooks
+ *    - Escape output data properly
+ * 
+ * 5. Debugging:
+ *    - Use error_log() for debugging hook execution
+ *    - Check if hooks are running with has_action() and has_filter()
+ *    - Use current_action() and current_filter() to identify context
+ * 
+ * 6. Documentation:
+ *    - Document your custom hooks for other developers
+ *    - Include parameter descriptions and examples
+ *    - Mention when hooks are fired and what they do
+ * 
+ * 7. Testing:
+ *    - Test hooks in different contexts (admin, frontend, AJAX)
+ *    - Test with different user roles and capabilities
+ *    - Test hook removal and modification
+ * 
+ * 8. Compatibility:
+ *    - Check if functions exist before using them
+ *    - Be aware of WordPress version compatibility
+ *    - Consider multisite compatibility
+ * 
+ * DEBUGGING HOOKS:
+ * 
+ * // Check if a hook exists
+ * if (has_action('init', 'your_function')) {
+ *     // Hook is registered
+ * }
+ * 
+ * // Get current action/filter
+ * $current_action = current_action();
+ * $current_filter = current_filter();
+ * 
+ * // Check if action is currently executing
+ * if (doing_action('init')) {
+ *     // We're currently in the init action
+ * }
+ * 
+ * // List all hooks for debugging
+ * global $wp_filter;
+ * var_dump($wp_filter['init']); // Shows all functions hooked to init
+ */

@@ -222,26 +222,6 @@ function hth_check_and_insert_initial_data()
 // SECTION 3: READ OPERATIONS
 // Retrieving data from the database
 
-    // Check if the table exists using SHOW TABLES
-    // $wpdb->get_var() returns a single value
-    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name;
-    
-    if ($table_exists) {
-        // Check if table already has data to avoid duplicates
-        $count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name");
-        
-        if ($count == 0) {
-            // Insert initial sample data
-            hth_insert_custom_data('Sample Name', 'Sample Value');
-            hth_insert_custom_data('WordPress', 'Content Management System');
-            hth_insert_custom_data('PHP', 'Server-side scripting language');
-        }
-    }
-}
-
-// SECTION 3: READ OPERATIONS
-// Retrieving data from the database
-
 /**
  * Function to retrieve data from the custom table
  * 

@@ -1,0 +1,156 @@
+/**
+ * HTH Sample Plugin - Shortcode Styles
+ * 
+ * Specific styles for shortcode implementations.
+ */
+
+/* Tab Shortcode Styles */
+.hth-shortcode-tabs {
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.hth-shortcode-tabs .tab-nav {
+    display: flex;
+    background: #f1f1f1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.hth-shortcode-tabs .tab-nav li {
+    margin: 0;
+    border-right: 1px solid #ddd;
+}
+
+.hth-shortcode-tabs .tab-nav li:last-child {
+    border-right: none;
+}
+
+.hth-shortcode-tabs .tab-nav a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.hth-shortcode-tabs .tab-nav a:hover {
+    background: #e1e1e1;
+    color: #0073aa;
+}
+
+.hth-shortcode-tabs .tab-nav a.active {
+    background: #fff;
+    color: #0073aa;
+    font-weight: bold;
+}
+
+.hth-shortcode-tabs .tab-content {
+    padding: 20px;
+    background: #fff;
+}
+
+.hth-shortcode-tabs .tab-pane {
+    display: none;
+}
+
+.hth-shortcode-tabs .tab-pane.active {
+    display: block;
+}
+
+/* AJAX Form Shortcode */
+.hth-ajax-form-container {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.hth-ajax-form .form-field {
+    margin-bottom: 15px;
+}
+
+.hth-ajax-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.hth-ajax-form input[type="text"],
+.hth-ajax-form input[type="email"],
+.hth-ajax-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.hth-ajax-form textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.hth-ajax-form .submit-button {
+    background: #0073aa;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.hth-ajax-form .submit-button:hover {
+    background: #005a87;
+}
+
+.hth-ajax-form .submit-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Form Messages */
+.hth-form-message {
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.hth-form-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.hth-form-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsive Shortcodes */
+@media (max-width: 768px) {
+    .hth-shortcode-tabs .tab-nav {
+        flex-direction: column;
+    }
+    
+    .hth-shortcode-tabs .tab-nav li {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .hth-shortcode-tabs .tab-nav li:last-child {
+        border-bottom: none;
+    }
+    
+    .hth-ajax-form-container {
+        padding: 15px;
+    }
+}

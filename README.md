@@ -28,8 +28,8 @@ hth-sample-plugin/
     ├── shortcodes.php             # Chapter 2: Shortcodes
     ├── custom-post-types.php      # Chapter 3: Custom Post Types
     ├── rest-api.php               # Chapter 4: REST API
-    ├── widgets.php                # Chapter 5: Widgets
-    ├── enqueue-scripts.php        # Chapter 6: Scripts and Styles
+    ├── enqueue-scripts.php        # Chapter 5: Scripts and Styles
+    ├── widgets.php                # Chapter 6: Widgets
     └── database-operations.php    # Chapter 7: Database Operations
 ```
 
@@ -95,7 +95,20 @@ Extend WordPress REST API:
 - CRUD operations via REST
 - JSON response formatting
 
-### Chapter 5: Widgets
+### Chapter 5: Scripts and Styles
+**File:** `chapters/enqueue-scripts.php`
+
+Properly load assets:
+- Enqueue CSS and JavaScript files
+- Handle dependencies
+- Conditional loading (admin vs frontend)
+
+**Best Practices:**
+- Use `wp_enqueue_script()` and `wp_enqueue_style()`
+- Proper dependency management
+- Version control for cache busting
+
+### Chapter 6: Widgets
 **File:** `chapters/widgets.php`
 
 Develop custom widgets:
@@ -108,19 +121,6 @@ Develop custom widgets:
 - Customizable widget options
 - Dynamic content display
 - Integration with WordPress widget system
-
-### Chapter 6: Scripts and Styles
-**File:** `chapters/enqueue-scripts.php`
-
-Properly load assets:
-- Enqueue CSS and JavaScript files
-- Handle dependencies
-- Conditional loading (admin vs frontend)
-
-**Best Practices:**
-- Use `wp_enqueue_script()` and `wp_enqueue_style()`
-- Proper dependency management
-- Version control for cache busting
 
 ### Chapter 7: Database Operations
 **File:** `chapters/database-operations.php`

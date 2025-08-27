@@ -1,0 +1,236 @@
+/**
+ * HTH Sample Plugin - Frontend Styles
+ * 
+ * Main stylesheet for the HTH Sample Plugin frontend display.
+ * This file contains basic styles for the plugin's frontend components.
+ */
+
+/* Plugin Container Styles */
+.hth-plugin-container {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Custom Post Type Styles */
+.hth-book-post {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #fff;
+    border-left: 4px solid #0073aa;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.hth-book-meta {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 3px;
+}
+
+.hth-book-meta strong {
+    color: #333;
+}
+
+/* Shortcode Styles */
+.hth-shortcode-container {
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.hth-custom-message {
+    padding: 10px 15px;
+    margin: 10px 0;
+    border-left: 4px solid #0073aa;
+    background-color: #f0f6fc;
+}
+
+.hth-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0073aa;
+    color: white;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.hth-button:hover {
+    background-color: #005a87;
+    color: white;
+    text-decoration: none;
+}
+
+.hth-box {
+    padding: 20px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* Tab Styles */
+.hth-tabs-container {
+    margin: 20px 0;
+}
+
+.hth-tabs-nav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.hth-tab-nav-item {
+    margin: 0;
+    padding: 0;
+}
+
+.hth-tab-nav-link {
+    display: block;
+    padding: 12px 20px;
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hth-tab-nav-link:hover {
+    background: #e1e1e1;
+    color: #333;
+    text-decoration: none;
+}
+
+.hth-tab-nav-link.active {
+    background: #fff;
+    color: #0073aa;
+    font-weight: bold;
+}
+
+.hth-tab-content {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background: #fff;
+}
+
+.hth-tab-pane {
+    display: none;
+}
+
+.hth-tab-pane.active {
+    display: block;
+}
+
+/* Recent Posts Styles */
+.hth-recent-posts {
+    margin: 20px 0;
+}
+
+.hth-recent-posts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hth-recent-posts li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-left: 3px solid #0073aa;
+}
+
+.hth-recent-posts a {
+    color: #0073aa;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hth-recent-posts a:hover {
+    color: #005a87;
+    text-decoration: underline;
+}
+
+/* Widget Styles */
+.hth-widget {
+    margin-bottom: 20px;
+}
+
+.hth-widget-title {
+    margin: 0 0 15px 0;
+    padding: 10px;
+    background: #0073aa;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.hth-widget-content {
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .hth-plugin-container {
+        margin: 10px 0;
+        padding: 15px;
+    }
+    
+    .hth-tabs-nav {
+        flex-direction: column;
+    }
+    
+    .hth-tab-nav-link {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .hth-tab-nav-link.active {
+        border-bottom: 1px solid #ddd;
+    }
+}
+
+/* Loading States */
+.hth-loading {
+    opacity: 0.6;
+    position: relative;
+}
+
+.hth-loading::after {
+    content: "Loading...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 3px;
+    font-style: italic;
+}
+
+/* Utility Classes */
+.hth-text-center {
+    text-align: center;
+}
+
+.hth-text-right {
+    text-align: right;
+}
+
+.hth-hidden {
+    display: none !important;
+}
+
+.hth-clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
