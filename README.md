@@ -1,6 +1,7 @@
 # HTH Sample Plugin - WordPress Plugin Development Tutorial
 
 A comprehensive WordPress plugin developed for educational purposes, demonstrating various WordPress development concepts through practical examples.
+You can follow the video tutorial on [youtube](https://www.youtube.com/playlist?list=PLBVvocIbiZ9mbk7D8oAg7UYAPQ_Zyjfpb) for this repo
 
 ## 📋 Overview
 
